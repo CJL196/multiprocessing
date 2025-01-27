@@ -1,0 +1,6 @@
+.vscode
+draft*
+*.log
+__pycache__
+trashbin
+main
