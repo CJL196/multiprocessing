@@ -3,8 +3,8 @@
 
 int main(int argc, char** argv) {
     int rank, size;
-    int sendbuf[4] = {10, 20, 30, 40};  // 根进程中的数据
-    int recvbuf;                        // 每个进程接收的数据
+    int sendbuf[8] = {10, 20, 30, 40, 50, 60, 70, 80};  // 根进程中的数据
+    int recvbuf[2];                        // 每个进程接收的数据
 
     // 初始化 MPI
     MPI_Init(&argc, &argv);
@@ -21,10 +21,10 @@ int main(int argc, char** argv) {
     }
 
     // 根进程（rank 0）分发数据
-    MPI_Scatter(sendbuf, 1, MPI_INT, &recvbuf, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Scatter(sendbuf, 2, MPI_INT, &recvbuf, 2, MPI_INT, 0, MPI_COMM_WORLD);
 
     // 每个进程输出接收到的数据
-    printf("Process %d received data: %d\n", rank, recvbuf);
+    printf("Process %d received data: %d, %d\n", rank, recvbuf[0], recvbuf[1]);
 
     // 结束 MPI
     MPI_Finalize();
